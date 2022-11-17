@@ -1,6 +1,5 @@
 package com.example.wheatherapp.adapters
 
-import android.media.browse.MediaBrowser.ItemCallback
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,24 +8,26 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wheatherapp.R
 import com.example.wheatherapp.databinding.ListItemBinding
+import com.squareup.picasso.Picasso
 
-class WeatherAdapter : ListAdapter<DayItem, WeatherAdapter.Holder>(Comparator()) {
+class WeatherAdapter : ListAdapter<WeatherModel, WeatherAdapter.Holder>(Comparator()) {
 
     class Holder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ListItemBinding.bind(view)
-        fun bind(item: DayItem) = with(binding) {
+        fun bind(item: WeatherModel) = with(binding){
             tvDate.text = item.time
             tvCondition1.text = item.condition
-            tvTemp.text = item.currentTemp
+            tvTemp.text = item.currentTemp.ifEmpty { "${item.maxTemp}ºC / ${item.minTemp}ºC"}
+            Picasso.get().load("https:" + item.imageUrl).into(im)
         }
     }
 
-    class Comparator : DiffUtil.ItemCallback<DayItem>() {
-        override fun areItemsTheSame(oldItem: DayItem, newItem: DayItem): Boolean {
+    class Comparator : DiffUtil.ItemCallback<WeatherModel>() {
+        override fun areItemsTheSame(oldItem: WeatherModel, newItem: WeatherModel): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: DayItem, newItem: DayItem): Boolean {
+        override fun areContentsTheSame(oldItem: WeatherModel, newItem: WeatherModel): Boolean {
             return oldItem == newItem
         }
 

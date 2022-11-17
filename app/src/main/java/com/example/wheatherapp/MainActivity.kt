@@ -19,7 +19,6 @@ import org.json.JSONObject
 Возможность выбрать любой другой город, и узнать прогноз погоды в нем
  */
 
-const val API_KEY = "5b7eccfd389946bb809132017221611"
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,22 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getResult(name: String) {
-        val url = "http://api.weatherapi.com/v1/current.json" +
-                "?key=$API_KEY&q=$name&aqi=no"
-        val queue = Volley.newRequestQueue(this)
-        val stringRequest = StringRequest(Request.Method.GET, url,
-            { response ->
-                val obj = JSONObject(response)
-                val temp = obj.getJSONObject("current")
-                Log.d("MyLog", "Response: ${temp.getString("temp_c")}")
-            },
-            {
-                Log.d("MyLog", "Error: $it")
-            }
-        )
-        queue.add(stringRequest)
-    }
+
 
 
 }
