@@ -2,15 +2,10 @@ package com.example.wheatherapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+
 
 import com.example.wheatherapp.databinding.ActivityMainBinding
-import com.example.wheatherapp.fragments.MainFragment
-import org.json.JSONArray
-import org.json.JSONObject
+
 
 /*
 Отображение прогноза погоды за текущий день
@@ -35,8 +30,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
     }
-
-
 
 
 }

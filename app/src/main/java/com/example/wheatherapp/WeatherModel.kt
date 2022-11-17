@@ -1,4 +1,4 @@
-package com.example.wheatherapp.adapters
+package com.example.wheatherapp
 
 data class WeatherModel(
     val city: String,
