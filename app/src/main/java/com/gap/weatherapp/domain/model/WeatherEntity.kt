@@ -4,5 +4,5 @@ data class WeatherEntity(
     val city: City,
     val cnt: Int,
     val cod: String,
-    val list: List<WeatherInfo>
+    val listDay: List<WeatherInfo>
 )

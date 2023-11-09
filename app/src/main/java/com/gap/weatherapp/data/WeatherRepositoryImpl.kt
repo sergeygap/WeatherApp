@@ -4,14 +4,15 @@ import com.gap.weatherapp.data.mapper.Mapper
 import com.gap.weatherapp.data.network.ApiFactory
 import com.gap.weatherapp.domain.WeatherRepository
 import com.gap.weatherapp.domain.model.WeatherEntity
+import com.gap.weatherapp.domain.model.WeatherInfo
 
 class WeatherRepositoryImpl : WeatherRepository {
 
     private val apiService = ApiFactory.apiService
     private val mapper = Mapper()
 
-    override suspend fun getAllWeatherForecast(lat: Double, lon: Double): WeatherEntity {
-        return mapper.mapDtoToEntity(apiService.getAllWeather(lat, lon))
+    override suspend fun getAllWeatherForecast(lat: Double, lon: Double): List<WeatherInfo> {
+        return mapper.mapDtoToEntity(apiService.getAllWeather(lat, lon)).listDay
     }
 
     override suspend fun getDetailsWeatherForecast(): WeatherEntity {

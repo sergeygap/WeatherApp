@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("forecast?units=metric&appid=a18f2c4bb4015c190dfe835f71408a41&lang=ru&cnt=5")
+    @GET("forecast?units=metric&appid=a18f2c4bb4015c190dfe835f71408a41&lang=ru")
     suspend fun getAllWeather(
         @Query(LAT) lat: Double,
         @Query(LON) lon: Double

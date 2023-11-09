@@ -9,7 +9,7 @@ class Mapper {
             city = dto.city,
             cnt = dto.cnt,
             cod = dto.cod,
-            list = dto.list
+            listDay = dto.list
         )
     }
 }
