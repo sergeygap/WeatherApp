@@ -2,22 +2,16 @@ package com.gap.weatherapp.presentation
 
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.gap.weatherapp.R
+import androidx.lifecycle.ViewModelProvider
 import com.gap.weatherapp.databinding.ActivitySplashScreenBinding
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
+import com.gap.weatherapp.presentation.viewModels.SplashScreenViewModel
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
@@ -26,21 +20,25 @@ class SplashScreenActivity : AppCompatActivity() {
         ActivitySplashScreenBinding.inflate(layoutInflater)
     }
 
-    private val geoService by lazy {
-        LocationServices.getFusedLocationProviderClient(this)
-    }
-    private val locationRequest by lazy {
-        initLocationRequest()
+    private val viewModel by lazy {
+        ViewModelProvider(this)[SplashScreenViewModel::class.java]
     }
 
-    private lateinit var mLocation: Location
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         startActivity()
-
     }
+
+    private fun startActivity() {
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+        checkPermissionLocation()
+    }
+
 
     private fun checkPermissionLocation() {
         val permissionGrantedFineLocation = ActivityCompat.checkSelfPermission(
@@ -65,8 +63,27 @@ class SplashScreenActivity : AppCompatActivity() {
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION
             ),
-            ACCESS_LOCATION_RC
+            SplashScreenViewModel.ACCESS_LOCATION_RC
         )
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun requestLocation() {
+        viewModel.geoService.requestLocationUpdates(
+            viewModel.locationRequest,
+            viewModel.geoCallback,
+            null
+        )
+        Handler(Looper.getMainLooper()).postDelayed({
+            startMainActivity()
+            finish()
+        }, 1000)
+    }
+
+
+    private fun startMainActivity() {
+        val intent = MainActivity.newIntent(this)
+        startActivity(intent)
     }
 
     override fun onRequestPermissionsResult(
@@ -74,7 +91,7 @@ class SplashScreenActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if (requestCode == ACCESS_LOCATION_RC && grantResults.isNotEmpty()) {
+        if (requestCode == SplashScreenViewModel.ACCESS_LOCATION_RC && grantResults.isNotEmpty()) {
             val permissionGrantedCoarseLocation =
                 grantResults[0] == PackageManager.PERMISSION_GRANTED
             val permissionGrantedFineLocation = grantResults[1] == PackageManager.PERMISSION_GRANTED
@@ -87,53 +104,5 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    @SuppressLint("MissingPermission")
-    private fun requestLocation() {
-        geoService.requestLocationUpdates(locationRequest, geoCallback, null)
-        Handler(Looper.getMainLooper()).postDelayed({
-            startMainActivity()
-            finish()
-        }, 1000)
-    }
-
-    private fun startActivity() {
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-        checkPermissionLocation()
-    }
-
-    private fun startMainActivity() {
-        val intent = MainActivity.newIntent(this)
-        startActivity(intent)
-    }
-
-    private fun initLocationRequest(): LocationRequest {
-        return LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000)
-            .setIntervalMillis(INTERVAL_MILLIS)
-            .setMinUpdateIntervalMillis(INTERVAL_MILLIS / 2)
-            .setWaitForAccurateLocation(false)
-            .setMaxUpdateDelayMillis(10000)
-            .build()
-    }
-
-    private val geoCallback = object : LocationCallback() {
-        override fun onLocationResult(geo: LocationResult) {
-            Log.d("LocationsTest", "onLocationResult: ${geo.locations.size}")
-            for (location in geo.locations) {
-                mLocation = location
-                Log.d(
-                    "LocationsTest",
-                    "onLocationResult: lat: ${location.latitude}, lon: ${location.longitude}"
-                )
-            }
-        }
-    }
-
-    companion object {
-        private const val INTERVAL_MILLIS = 10000L
-        private const val ACCESS_LOCATION_RC = 100
-    }
 
 }
