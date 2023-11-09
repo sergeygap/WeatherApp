@@ -1,8 +1,10 @@
-package com.gap.weatherapp.domain.model
+package com.gap.weatherapp.data.network.model
+
+
 
 data class WeatherDto(
-    val city: City,
+    val city: CityDto,
     val cnt: Int,
     val cod: String,
-    val list: List<WeatherInfo>
+    val list: List<WeatherInfoDto>
 )

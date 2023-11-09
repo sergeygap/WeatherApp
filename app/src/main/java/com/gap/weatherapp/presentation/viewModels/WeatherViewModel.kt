@@ -26,6 +26,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
             newsList.add(list[8])
             newsList.add(list[16])
             newsList.add(list[24])
+            newsList.add(list[32])
             _weatherLD.value = newsList
         }
 

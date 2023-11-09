@@ -1,5 +1,6 @@
 package com.gap.weatherapp.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -30,15 +31,16 @@ class WeatherAdapter(
         holder: WeatherViewHolder,
         weatherForecast: WeatherInfo
     ) {
+        Log.d("testRV", "setUpItem: $weatherForecast")
         with(holder.binding) {
             with(weatherForecast) {
-                tvDate.text = dtTxt
+                tvDate.text = dt_txt
                 tvClouds.text = clouds.all.toString()
                 tvHumidity.text = main.humidity.toString()
                 tvPressure.text = main.pressure.toString()
                 tvWindSpeed.text = wind.speed.toString()
-                tvMinTemperature.text = main.tempMin.toString()
-                tvMaxTemperature.text = main.tempMax.toString()
+                tvMinTemperature.text = main.temp_min.toString()
+                tvMaxTemperature.text = main.temp_max.toString()
                 root.setOnClickListener {
                     onNewsClickListener?.let {
                         it.onNewsClick(dt)

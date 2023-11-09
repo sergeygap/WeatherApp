@@ -1,6 +1,7 @@
 package com.gap.weatherapp.data.network
 
-import com.gap.weatherapp.domain.model.WeatherDto
+import com.gap.weatherapp.data.network.model.WeatherDto
+import com.gap.weatherapp.domain.model.WeatherEntity
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -9,7 +10,7 @@ interface ApiService {
     suspend fun getAllWeather(
         @Query(LAT) lat: Double,
         @Query(LON) lon: Double
-    ): WeatherDto
+    ): WeatherEntity
 
 
     companion object {

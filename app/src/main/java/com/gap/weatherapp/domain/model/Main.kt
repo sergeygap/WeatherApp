@@ -1,10 +1,10 @@
 package com.gap.weatherapp.domain.model
 
 data class Main(
-    val feelsLike: Double,
+    val feels_like: Double,
     val humidity: Int,
     val pressure: Int,
     val temp: Double,
-    val tempMax: Double,
-    val tempMin: Double
+    val temp_max: Double,
+    val temp_min: Double
 )
