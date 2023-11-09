@@ -24,6 +24,8 @@ class SplashScreenActivity : AppCompatActivity() {
         ViewModelProvider(this)[SplashScreenViewModel::class.java]
     }
 
+    private var lat = 0.0
+    private var lon = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +56,7 @@ class SplashScreenActivity : AppCompatActivity() {
         } else {
             requestPermission()
         }
+
     }
 
     private fun requestPermission() {
@@ -77,12 +80,16 @@ class SplashScreenActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             startMainActivity()
             finish()
-        }, 1000)
+        }, 2000)
     }
 
 
     private fun startMainActivity() {
-        val intent = MainActivity.newIntent(this)
+        viewModel.weatherLD.observe(this) {
+            lat = it[0]
+            lon = it[1]
+        }
+        val intent = MainActivity.newIntent(this, lat, lon)
         startActivity(intent)
     }
 
@@ -98,6 +105,7 @@ class SplashScreenActivity : AppCompatActivity() {
             if (permissionGrantedCoarseLocation && permissionGrantedFineLocation) {
                 requestLocation()
             } else {
+                binding.splashTV.visibility = View.GONE
                 binding.errorTV.visibility = View.VISIBLE
             }
         }

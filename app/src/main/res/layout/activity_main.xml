@@ -9,7 +9,6 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"
-        android:name="com.gap.weatherapp.presentation.WeatherFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +54,7 @@
             android:layout_gravity="center"
             android:background="@color/white"
             android:contentDescription="@null"
-            android:src="@drawable/button_news"
+            android:src="@drawable/button_map"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/actions_weather_forecast"
             app:layout_constraintHorizontal_bias="0.5"
@@ -70,7 +69,7 @@
             android:layout_gravity="center"
             android:background="@color/white"
             android:contentDescription="@null"
-            android:src="@drawable/button_news_selected"
+            android:src="@drawable/button_weather_selected"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/actions_favorites"
             app:layout_constraintHorizontal_bias="0.5"

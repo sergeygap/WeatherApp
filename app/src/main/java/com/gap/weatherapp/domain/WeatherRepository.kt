@@ -1,9 +1,10 @@
 package com.gap.weatherapp.domain
 
+import com.gap.weatherapp.domain.model.WeatherDto
 import com.gap.weatherapp.domain.model.WeatherEntity
 import com.gap.weatherapp.domain.model.WeatherInfo
 
 interface WeatherRepository {
-    fun getAllWeatherForecast(): List<WeatherInfo>
-    fun getDetailsWeatherForecast(): WeatherEntity
+   suspend fun getAllWeatherForecast(lat: Double, lon: Double): WeatherEntity
+   suspend fun getDetailsWeatherForecast(): WeatherEntity
 }
