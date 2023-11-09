@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="reload_toast">Данные разрешения очень важны для работы приложения. Пожалуйста, перезапустите приложение и выдайте доступ</string>
 </resources>
