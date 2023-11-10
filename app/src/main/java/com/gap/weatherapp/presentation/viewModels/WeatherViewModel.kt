@@ -18,9 +18,14 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
     val weatherLD: LiveData<List<WeatherInfo>>
         get() = _weatherLD
 
+    private val _cityLD = MutableLiveData<String>()
+    val cityLD: LiveData<String>
+        get() = _cityLD
+
     fun getWeatherList(lat: Double, lon: Double) {
         viewModelScope.launch {
             val entity = getAllWeatherForecastUseCase(lat, lon)
+            _cityLD.value = entity.city.name
             val list = entity.list
             val newsList = mutableListOf<WeatherInfo>()
             newsList.add(list[0])

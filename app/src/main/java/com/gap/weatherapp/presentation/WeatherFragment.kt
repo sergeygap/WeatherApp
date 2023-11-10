@@ -7,13 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gap.weatherapp.R
-import com.gap.weatherapp.data.network.ApiFactory
 import com.gap.weatherapp.databinding.FragmentWeatherBinding
 import com.gap.weatherapp.presentation.adapter.WeatherAdapter
 import com.gap.weatherapp.presentation.viewModels.WeatherViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class WeatherFragment() : Fragment() {
 
@@ -48,6 +44,13 @@ class WeatherFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         workWithAdapter()
         workWithViewModel()
+        workingWithUi()
+    }
+
+    private fun workingWithUi() {
+        viewModel.cityLD.observe(viewLifecycleOwner) {
+            binding.weatherCity.text = it
+        }
     }
 
     private fun workWithViewModel() {
