@@ -34,7 +34,7 @@ class WeatherAdapter(
         Log.d("testRV", "setUpItem: $weatherForecast")
         with(holder.binding) {
             with(weatherForecast) {
-                tvDate.text = dt_txt
+                tvDate.text = dt_txt.substring(0, 11)
                 tvClouds.text = clouds.all.toString()
                 tvHumidity.text = main.humidity.toString()
                 tvPressure.text = main.pressure.toString()

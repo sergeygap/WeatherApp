@@ -7,4 +7,11 @@
     <string name="favourites_fragment">Favourites Fragment</string>
     <string name="news_fragment">News Fragment</string>
     <string name="settings_fragment">Settings Fragment</string>
+    <string name="weather_date">Погода на:</string>
+    <string name="clouds">Облачность:</string>
+    <string name="humidity">Влажность:</string>
+    <string name="pressure">Давление:</string>
+    <string name="wind_speed">Скорость ветра:</string>
+    <string name="max">Температура max:</string>
+    <string name="min">Температура min:</string>
 </resources>

@@ -20,7 +20,8 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
 
     fun getWeatherList(lat: Double, lon: Double) {
         viewModelScope.launch {
-            val list: List<WeatherInfo> = getAllWeatherForecastUseCase(lat, lon)
+            val entity = getAllWeatherForecastUseCase(lat, lon)
+            val list = entity.list
             val newsList = mutableListOf<WeatherInfo>()
             newsList.add(list[0])
             newsList.add(list[8])

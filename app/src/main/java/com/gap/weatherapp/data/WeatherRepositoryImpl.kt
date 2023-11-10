@@ -11,8 +11,8 @@ class WeatherRepositoryImpl : WeatherRepository {
     private val apiService = ApiFactory.apiService
     private val mapper = Mapper()
 
-    override suspend fun getAllWeatherForecast(lat: Double, lon: Double): List<WeatherInfo> {
-        return apiService.getAllWeather(lat, lon).list
+    override suspend fun getAllWeatherForecast(lat: Double, lon: Double): WeatherEntity {
+        return apiService.getAllWeather(lat, lon)
     }
 
     override suspend fun getDetailsWeatherForecast(): WeatherEntity {
