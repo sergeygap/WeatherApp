@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -58,4 +59,8 @@ dependencies {
     //GPS
     implementation("io.nlopez.smartlocation:library:3.3.3")
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    //Room
+    implementation("androidx.room:room-runtime:2.6.0")
+    ksp("androidx.room:room-compiler:2.5.0")
+    implementation("androidx.room:room-ktx:2.6.0")
 }

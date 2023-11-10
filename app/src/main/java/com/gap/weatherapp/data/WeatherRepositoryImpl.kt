@@ -9,7 +9,11 @@ class WeatherRepositoryImpl : WeatherRepository {
     private val apiService = ApiFactory.apiService
 
     override suspend fun getAllWeatherForecast(lat: Double, lon: Double): WeatherEntity {
-        return apiService.getAllWeather(lat, lon)
+        try {
+            return apiService.getAllWeather(lat, lon)
+        } catch (e: Exception) {
+            throw RuntimeException("User has not internet")
+        }
     }
 
 
