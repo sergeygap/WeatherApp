@@ -72,7 +72,7 @@ class WeatherFragment() : Fragment() {
 
     private fun launchNewsDetailsFragment(id: Int) {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, WeatherDetailsFragment.newInstance(id))
+            .replace(R.id.fragment_container_view, WeatherDetailsFragment.newInstance(id, lat, lon))
             .addToBackStack(null).commit()
     }
 

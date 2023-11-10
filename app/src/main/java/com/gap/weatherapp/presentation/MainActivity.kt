@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.gap.weatherapp.R
 import com.gap.weatherapp.databinding.ActivityMainBinding
@@ -96,6 +98,12 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragment_container_view, fragment)
                 .commit()
         }
+    }
+
+    override fun onBackPressed() {
+        val constraintLayout = findViewById<ConstraintLayout>(R.id.bottomNavigationView)
+        constraintLayout.visibility = View.VISIBLE
+        super.onBackPressed()
     }
 
     companion object {

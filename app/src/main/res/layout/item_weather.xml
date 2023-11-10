@@ -13,6 +13,16 @@
         android:layout_height="wrap_content">
 
 
+        <TextView
+            android:id="@+id/tvHumidity3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/percent"
+            android:textColor="@color/black"
+            android:textStyle="italic"
+            app:layout_constraintStart_toEndOf="@+id/tvClouds"
+            app:layout_constraintTop_toTopOf="@+id/tvClouds" />
+
         <View
             android:id="@+id/view3"
             android:layout_width="0dp"

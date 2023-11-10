@@ -14,4 +14,8 @@
     <string name="wind_speed">Скорость ветра:</string>
     <string name="max">Температура max:</string>
     <string name="min">Температура min:</string>
+    <string name="details_weather">Детальная информация:</string>
+    <string name="weather_now">Температура:</string>
+    <string name="feels_like">Ощущается как:</string>
+    <string name="percent">%</string>
 </resources>

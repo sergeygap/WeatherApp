@@ -5,5 +5,5 @@ import com.gap.weatherapp.domain.model.WeatherInfo
 
 interface WeatherRepository {
    suspend fun getAllWeatherForecast(lat: Double, lon: Double): WeatherEntity
-   suspend fun getDetailsWeatherForecast(): WeatherEntity
+
 }

@@ -31,7 +31,6 @@ class WeatherAdapter(
         holder: WeatherViewHolder,
         weatherForecast: WeatherInfo
     ) {
-        Log.d("testRV", "setUpItem: $weatherForecast")
         with(holder.binding) {
             with(weatherForecast) {
                 tvDate.text = dt_txt.substring(0, 11)
@@ -43,7 +42,7 @@ class WeatherAdapter(
                 tvMaxTemperature.text = main.temp_max.toString()
                 root.setOnClickListener {
                     onNewsClickListener?.let {
-                        it.onNewsClick(dt)
+                        it.onNewsClick(holder.adapterPosition)
                     }
                 }
             }
